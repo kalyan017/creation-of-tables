@@ -1,0 +1,92 @@
+
+# creating a movies table-
+create table movies(
+movie_id int,
+movie_budget bigint,
+ticket_price decimal(5,2),
+critic_score float,
+audiance_rating double,
+category char(2),
+movie_name varchar(50)
+);
+insert into movies 
+values(1111,150000000,299,87,9.4,'a+','rajasaab'),
+(2222,112242423,399,77,3.4,'a','spirit');
+
+
+#creating movie_details table:
+create table movie_details(
+description_movie text,
+release_date date,
+show_time time,
+last_update datetime,
+movie_updation timestamp);
+
+#creating student table:
+create table student(
+st_id int primary key,
+st_name varchar(20) not null,
+st_age int check (st_age>=18),
+st_mobile varchar(10) check (char_length(st_mobile)=10),
+c_id int,
+foreign key (c_id) references course(c_id)
+);
+
+insert into student values 
+(1,'kalyan',22,'1223456789',111),
+(2,'kalyanreddy',22,'1223456789',222),
+(3,'kalyanr',22,'1223456789',333);
+
+
+#creating course table:
+create table course(
+c_id int primary key,
+c_name varchar(20) unique,
+c_duration int,
+c_category varchar(10) default 'demo'
+);
+ 
+insert into course
+values (111,'python full stack',6,'offline'),
+(222,'java full stack',6,'online'),
+(333,'python with ai',6,default);
+
+
+
+
+#creating dept table:
+create table dept(
+deptno int primary key,
+dname varchar(14),
+loc varchar(13)
+);
+insert into dept 
+values(10,'ACCOUNTING','NEW YORK'),
+ (20,'RESEARCH','DALLAS'),(30,'SALES','CHICAGO'), (40,'OPERATIONS','BOSTON');
+
+#creating emp table:
+CREATE TABLE EMP (
+    EMPNO    int PRIMARY KEY,
+    ENAME    VARCHAR(10),
+    JOB      VARCHAR(9),
+    MGR      int,
+    HIREDATE DATE,
+    SAL      decimal(7,2),
+    COMM     decimal(7,2),
+    DEPTNO   int,
+    FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+);
+INSERT INTO EMP VALUES(7369,'SMITH','CLERK',7902,'80-12-17',800,NULL,20);
+INSERT INTO EMP VALUES(7499,'ALLEN','SALESMAN',7698,'81-02-20',1600,300,30);
+INSERT INTO EMP VALUES(7521,'WARD','SALESMAN',7698,'81-02-22',1250,500,30);
+INSERT INTO EMP VALUES(7566,'JONES','MANAGER',7839,'81-04-02',2975,NULL,20);
+INSERT INTO EMP VALUES(7654,'MARTIN','SALESMAN',7698,'81-09-28',1250,1400,30);
+INSERT INTO EMP VALUES(7698,'BLAKE','MANAGER',7839,'81-05-01',2850,NULL,30);
+INSERT INTO EMP VALUES(7782,'CLARK','MANAGER',7839,'81-06-09',2450,NULL,10);
+INSERT INTO EMP VALUES(7788,'SCOTT','ANALYST',7566,'87-04-19',3000,NULL,20);
+INSERT INTO EMP VALUES(7839,'KING','PRESIDENT',NULL,'81-11-17',5000,NULL,10);
+INSERT INTO EMP VALUES(7844,'TURNER','SALESMAN',7698,'81-09-08',1500,0,30);
+INSERT INTO EMP VALUES(7876,'ADAMS','CLERK',7788,'87-05-23',1100,NULL,20);
+INSERT INTO EMP VALUES(7900,'JAMES','CLERK',7698,'81-12-03',950,NULL,30);
+INSERT INTO EMP VALUES(7902,'FORD','ANALYST',7566,'81-12-03',3000,NULL,20);
+INSERT INTO EMP VALUES(7934,'MILLER','CLERK',7782,'82-01-23',1300,NULL,10);
