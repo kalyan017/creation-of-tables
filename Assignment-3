@@ -1,0 +1,91 @@
+Assignment-3:
+
+use empdb;
+
+#1.	WAQTD DETAILS OF EMPLOYEES WORKING AS CLERK AND EARNING LESS THAN 1500.
+select * from emp
+where job ='clerk' and sal<1500;
+
+#2.	WAQTD NAME AND HIREDATE OF THE EMPLOYEE WORKING AS MANAGER IN DEPARTMENT 30.
+select ename,hiredate from emp
+where job='manager' and deptno=30;
+
+#3.	WAQTD DETAILS OF EMPLOYEES ALONG WITH ANNUAL SALARY IF THEY ARE WORKING IN DEPARTMENT 30 AS SALESMAN AND THEIR ANNUAL SALARY MORE THAN 1400.
+select emp.*,sal*12 as annual_salary from emp
+where deptno=30 and job='salesman' and sal>1400;
+
+#4.	WAQTD ALL THE DETAILS OF EMPLOYEE WORKING IN DEPARTMENT 30 OR AS ANALYST.
+select * from emp
+where deptno=30 or job='analyst';
+
+#5.	WAQTD NAMES OF EMPLOYEE WHO IS EARNING SALARY GREATER THAN 1100 AND THEIR DESIGNATION IS CLERK.
+select ename from emp
+where sal>1100 and job='clerk';
+
+#6.	WAQTD NAME AND SALARY, ANNUAL SALARY AND DEPTNO IF DEPARTMENT 20 SALARY GREATER THAN 1100 AND ANNUAL SALARY GREATER THAN 12000.
+select ename,sal,sal*12 as annual_salary,deptno from emp
+where deptno=20 and sal>1100 and sal*12 >12000;
+
+#7.	WAQTD EMPLOYEE NUMBER AND NAMES OF THE EMPLOYEES WORKING AS MANAGER IN DEPARTMENT 30.
+select empno,ename from emp
+where job='manager' and deptno=30;
+
+#8.	WAQTD DETAILS OF EMPLOYEE WORKING IN DEPARTMENT 20 (OR) 30.
+select * from emp
+where deptno in (20,30);
+
+#9.	WAQTD DETAILS OF EMPLOYEES WORKING AS ANALYST IN DEPARTMENT 30.
+select * from emp
+where job='analyst' and deptno=30;
+
+#10.	WAQTD DETAILS OF EMPLOYEE WORKING AS PRESIDENT WITH SALARY OF 4000.
+select * from emp
+where job='president' and sal=4000;
+
+#11.	WAQTD NAMES, DEPARTMENT NUMBER AND JOB OF EMPLOYEE WORKING AS CLERK IN DEPARTMENT 10 (OR) 20.
+select ename,deptno,job from emp
+where job='clerk' and deptno in(10,20);
+
+#12.	WAQTD DETAILS OF EMPLOYEE WORKING AS CLERK (OR) MANAGER IN DEPTNO 10.
+select * from emp
+where job in ('clerk','manager') and deptno=10;
+
+#13.	WAQTD NAMES OF EMPLOYEES WORKING IN DEPARTMENT NUMBER 10,20,30,40.
+select ename from emp 
+where deptno in (10,20,30,40);
+
+#14.	WAQTD DETAILS OF EMPLOYEE WITH EMPLOYEE NUMBER 7902,7839.
+select* from emp 
+where empno in (7902,7839);
+
+#15.	WAQTD DETAILS OF EMPLOYEE WORKING AS MANAGER, SALESMAN, CLERK.
+select * from emp 
+where job in ('manager','salesman','clerk');
+
+#16.	WAQTD NAMES OF EMPLOYEES HIRED AFTER 1981 AND BEFORE 1982.
+select ename,hiredate from emp
+where hiredate>'1981-01-01' and hiredate<'1981-12-31';
+
+#17.	WAQTD DETAILS OF EMPLOYEES EARNING MORE THAN 1250 BUT LESS THAN 3000.
+select* from emp
+where sal between 1251 and 2999;
+
+#18.	WAQTD NAMES OF EMPLOYEES HIRED AFTER 1981 INTO DEPARTMENT NUMBER 10 OR 30.
+select ename from emp
+where hiredate>'1981-01-01'and deptno in (10,30);
+
+#19.	WAQTD NAMES OF EMPLOYEE ALONG WITH ANNUAL SALARY FOR THE EMPLOYEE WORKING AS MANAGER, CLERK INTO DEPARTMENT NUMBER 10, 30.
+select ename,sal*12 as annual_salary from emp
+where job in ('manager','clerk') and deptno in (10,30);
+
+#20.	WAQTD ALL THE DETAILS ALONG WITH ANNUAL SALARY IF SALARY BETWEEN 1000 AND 4000 AND ANNUAL SALARY GREATER THAN 15000
+select emp.*,sal*12 as annual_salary from emp
+where sal between 1000 and 4000  and (sal*12)>15000; 
+
+
+
+
+
+
+
+
