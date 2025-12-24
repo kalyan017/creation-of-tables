@@ -1,0 +1,111 @@
+create table class(
+st_id int,
+st_name varchar(15),
+st_age int,
+st_marks int,
+st_city varchar(20),
+admission_dt date);
+
+alter table class
+add st_email varchar(20);
+
+desc class;
+
+INSERT INTO class VALUES
+(1, 'Ravi', 20, 85, 'Hyderabad', '2022-06-10','ravi@gmail.com'),
+(2, 'Anita', 21, 72,'Bangalore', '2021-07-15','anita@yahoo.com'),
+(3, 'Kiran', 19, 90, 'Chennai', '2023-01-20',NULL),
+(4, 'Manoj', 22, 65, 'Pune', '2020-08-05', 'manoj@gmail.com'),
+(5, 'Sneha', 20, 78, 'Delhi', '2022-11-18',NULL);
+
+-- Assignment-5:  
+
+-- 1.	Display all student names in uppercase. 
+select upper(st_name) as uppername from class;
+
+select * from class;
+
+-- 2.	Display all student names in lowercase.
+select lower(st_name) as lowername from class;
+
+
+-- 3.	Display student name and the length of each name.
+select st_name,length(st_name) as length from class;
+
+-- 4.	Display student names in reverse order.
+select reverse(st_name) from class;
+
+-- 5.	Display student name along with city in the format:“Name lives in City”.
+select st_name,st_city as names_live_in_city
+from class;
+
+select concat(st_name,' get marks ',st_marks) as student_marks
+from class;
+
+-- 6.	Replace gmail with outlook in student email IDs.
+select replace(st_email,'gmail','outlook') from class;
+
+-- 7.	Display the first 3 characters of each student name.
+select st_name,substr(st_name,1,3) from class;
+
+-- 8.	Display the position of letter ‘A’ in each student name.
+select  st_name, instr(st_name,'a') as position_letter from class;
+
+-- 9.	Display student names padded on the left with * to make length 10.
+select st_name,lpad(st_name,10,'*') as left_pad from class;
+
+-- 10.	Display student names padded on the right with # to make length 12.
+select st_name,rpad(st_name,12,'*') as right_pad from class;
+
+-- 11.	Display the first 2 characters of each student name.
+select st_name,left(st_name,2) from class;
+
+-- 12.	Display the last 2 characters of each student name.
+select st_name,right(st_name,2) from class;
+
+-- 13.	Display the ASCII value of the first character of each student name.
+select st_name,ascii(st_name) as asciivalue from class;
+
+-- 14.	Display student marks and the remainder when marks are divided by 10.
+select st_marks,mod(st_marks,10) as remainder from class;
+
+-- 15.	Display student marks rounded to the nearest 10.
+select st_marks,round(st_marks,-1) as roundedmarks from class;
+use empdb;
+
+-- 16.	Display student marks truncated to tens.
+select st_marks,truncate(st_marks,-1) from class;
+
+-- 17.	Display the square root of student marks.
+select st_marks,sqrt(st_marks) from class;
+
+-- 18.	Display the absolute value of student marks (assume marks can be negative).
+select st_marks,abs(st_marks) from class;
+
+-- 19.	Display student name and only the admission date.
+select st_name,admission_dt from class;
+
+
+-- 20.	Display student name and number of years since admission.
+select st_name,admission_dt,timestampdiff(year,admission_dt,curdate()) as years_since_admission from class;
+
+-- 21.	Display student name and admission date after adding 6 months.
+select st_name,admission_dt,date_add(admission_dt,interval 6 month) from class;
+
+-- 22.	Display student name along with day, month, and year of admission.
+select st_name,admission_dt,day(admission_dt) as dayjoined,month(admission_dt) as monthjoined,year(admission_dt) as yearjoined from class;
+
+-- 23.	Display student name and the day name of admission.
+select st_name,dayname(admission_dt) as day_name_of_admisssion from class;
+
+-- 24.	Display student name and result status(Pass if marks ≥ 75, otherwise Fail).
+select st_name,st_marks,if(st_marks>=75,'pass','fail') from class;
+
+-- 25.	Display student email if email is NULL, display ‘Not Provided’.
+select st_email,ifnull(st_email,'not provided') from class;
+
+-- 26.	Display NULL if student city is Delhi, otherwise display city.
+select st_city,nullif(st_city,'delhi') from class;
+
+-- 27.	Display student email using COALESCE if email is missing.
+select st_name,st_email,coalesce(st_email,'missing') from class;
