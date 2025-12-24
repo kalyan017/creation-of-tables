@@ -1,0 +1,122 @@
+
+
+-- Assignment-1:
+-- WAQTD ALL THE DETAILS FROM THE EMPLOYEE TABLE.
+select * from emp;
+
+-- WAQTD NAMES OF ALL THE EMPLOYEES.
+select ename from emp;
+
+-- WAQTD NAME AND SALARY GIVEN TO ALL THE EMPLOYEES.
+select ename,sal from emp;
+
+-- WAQTD NAMES AND COMMISSION GIVEN TO ALL THE EMPLOYEES.
+select ename,comm from emp;
+
+-- WAQTD EMPNO AND DEPT NUMBER OF ALL THE EMPLOYEES IN EMPLOYEE TABLE.
+select empno,deptno from emp;
+
+-- WAQTD ENAME AND HIREDATE OF ALL THE EMPLOYEES.
+select ename,hiredate from emp;
+
+-- WAQTD NAME AND DESIGNATION OF ALL THE EMPLOYEES.
+select ename,job from emp;
+
+-- WAQTD NAME, JOB AND SALARY GIVEN TO ALL THE EMPLOYEES.
+select ename,job,sal from emp;
+
+-- WAQTD NAME OF THE EMPLOYEE ALONG WITH THEIR ANNUAL SALARY.
+select ename,sal*12 annual_sal from emp;
+
+-- WAQTD NAME, JOB FOR ALL THE EMPLOYEE WITH THEIR HALF-TERM SALARY.
+select ename,job,sal*6 half_term_salary from emp;
+
+-- WAQTD ALL THE DETAILS OF THE EMPLOYEE ALONG WIT AN ANNUAL BONUS OF 2000.
+select emp.*,2000 as annual_bonus from emp;
+
+-- WAQTD NAME, SALARY AND SALLARY WITH A HIKE OF 10 PERCENT.
+select ename,sal,sal*0.10 from emp;
+
+-- WAQTD NAME AND SALARY WITH DEDUCTION OF 25 PERCENT.
+select ename,sal,sal-sal*0.25 from emp;
+
+-- WAQTD NAME AND SALARY WITH MONTHLY HIKE OF 50.
+select ename,sal,sal*1.50 from emp;
+
+-- WAQTD NAME AND ANNUAL SALARY WITH DEDUCTION OF 10 PERCENT.
+select ename,sal*12,sal*12*0.90 from emp;
+
+-- WAQTD TOTAL SALARY GIVEN TO EACH EMPLOYEES SALARY PLUS COMMISSION.
+select sal,comm from emp;
+
+-- WAQTD DETAILS OF ALL THE EMPLOYEES ALONG WITH ANNUAL SALARY.
+select emp.*,sal*12 from emp ;
+
+-- WAQTD NAME AND DESIGNATION ALONG WITH 100 PENALITY IN SALARY.
+select ename,job,100 penality from emp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
