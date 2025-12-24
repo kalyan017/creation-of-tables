@@ -1,0 +1,126 @@
+
+-- order by:
+-- ---
+-- WAQTD DETAILS OF EMPLOYEES ACCORDING THEIR SALARY IN ASCENDING ORDER.
+select * from emp 
+order by sal;
+
+-- WAQTD NAMES OF EMPLOYEES IN ASCENDING ORDER.
+select ename from emp 
+order by ename;
+
+-- WAQTD NAMES AND SALARIES OF EMPLOYEES ARRANGE THE RECORDS BASED ON THEIR NAMES IN ASCENDING AND SALARIES IN DESCENDING ORDER.
+select ename,sal from emp
+order by ename asc ,sal desc;
+
+-- WAQTD NO. OF EMPLOYEES WORKING IN EACH DEPT ORDER BY NO. OF EMPLOYEES IN DESCENDING ORDER.
+select count(*) as working_in_each_dept,deptno from emp
+group by deptno
+order by count(*) desc;
+
+-- WAQTD NO. OF EMPLOYEES WORKING IN EACH JOB IF THEY ARE EARNING SALARY GREATER THAN 1000 AND ARRANGE THE RECORDS IN DESCENDING ORDER.
+select count(*),job from emp
+where sal>1000
+group by job
+order by count(*) desc ;
+
+-- WAQTD employee name and department number ordered by department number (ascending) and employee name (descending).
+select ename,deptno from emp
+order by deptno asc,ename desc;
+
+-- WAQTD employee name and salary ordered by salary descending, and if salary is same, order by employee name ascending.
+select ename,sal from emp 
+order by sal desc ,ename asc;
+
+-- WAQTD employees of department 30 ordered by salary ascending.
+select * from emp
+where deptno=30
+order by sal ;
+
+
+-- assignment-6:
+-- 1.	Waqtd no. of employees getting salary less than 2000 in department 10.
+select count(*) as no_of_emp from emp
+where sal<2000  and deptno=10
+group by deptno;
+
+-- 2.	Waqtd total salary needed to pay to employees who are working as clerk.
+select sum(sal) as sal_need_to_pay from emp
+where job='clerk'
+group by job;
+
+-- 3.	Waqtd average salary needed to pay all the employees.
+select job,avg(sal) as sal_need_to_pay from emp
+group by job;
+
+-- 4.	Waqtd no. of employees having ‘a’ as their first character.
+select count(*) as no_of_emp from emp 
+where ename like 'a%';
+
+-- 5.	Waqtd no. of employees working as clerk or manager.
+select count(*) as no_of_emp from emp 
+where job in ('clerk','manager'); 
+
+-- 6.	Waqtd total salary needed to pay employees hired in feb.
+select sum(sal) as total_sal from emp 
+where month(hiredate)=2;
+
+-- 7.	Waqtd no. of employees reporting to 7839.
+select count(*) as no_of_emp from emp
+where mgr=7839
+group by mgr;
+
+-- 8.	Waqtd no. of employees getting commission in department 30.
+select count(*) no_of_emp from emp
+where comm is not null and deptno=30;
+
+-- 9.	Waqtd average salary, total salary and no. of employees along with maximum salary given to employees working as president.
+select avg(sal),sum(sal),count(*) no_of_emp,max(sal) from emp
+where job='president';
+
+-- 10.	Waqtd no. of employees having ‘a’ in their names.
+select count(*) no_of_emp from emp 
+where ename like '%a%';
+
+-- 11.	Waqtd no. of employees and total salary needed to pay the employees who have consecutive L’s in their names.
+select count(*) no_of_emp,sum(sal) total_sal from emp 
+where ename like '%ll%';
+
+-- 12.	Waqtd no. of departments present in employee table.
+select count(distinct deptno) no_of_dept from emp ;
+
+-- 13.	Waqtd no. of employees having character ‘z’ in their name.
+select count(*) no_of_emp from emp
+where ename like'%z%';
+select * from emp;
+
+-- 14.	Waqtd no. of employees having ‘@’ in their names.
+select count(*) no_of_emp from emp 
+where ename like '%@%';
+
+-- 15.	Waqtd total salary given to employees working as clerk in department 30.
+select sum(sal) total_Sal from emp 
+where job='clerk' and deptno =30;
+
+-- 16.	Waqtd maximum salary given to the employees working as analyst.
+select max(sal) from emp 
+where job='analyst';
+
+-- 17.	Waqtd no. of distinct salaries present in employee table.
+select count(distinct sal) from emp;
+
+-- 18.	Waqtd no. of jobs present in employee table.
+select count(distinct job) from emp ;
+
+-- 19.	Waqtd average salary given to the clerk.
+select avg(sal) from emp 
+where job='clerk';
+
+-- 20.	Waqtd minimum salary given to employee who are working in department 10 as manager, clerk.
+select job, min(sal)  from emp
+where deptno=10 and job in ('manager','clerk')
+group by job,sal;
+
+-- 21.	Waqtd no. of employees earning less than 2900.
+select count(*) no_of_emp  from emp
+where sal<2900;
