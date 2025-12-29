@@ -1,0 +1,145 @@
+
+-- assignment-8:
+
+-- using all clauses:
+-- 1.	WAQTD department number and total salary of departments where employees earn more than 1000, total salary exceeds 5000,and display the result in descending order of total salary.
+select deptno,sum(sal) as total_sal from emp where sal>1000 group by deptno having total_sal >5000 order by total_sal desc;
+
+-- 2.	WAQTD job and number of employees excluding CLERKs, where job has more than 1 employee, and display jobs in descending order of employee count.
+select job ,count(*) no_of_emp from emp where job<>'clerk' group by job having count(*)>1 order by no_of_emp desc;
+
+-- 3.	WAQTD department number and average salary for departments other than 10, where average salary is greater than 2000, and order by average salary ascending.
+select deptno,avg(sal)  from emp where deptno <> 10 group by deptno having avg(sal)>2000 order by avg(sal);
+
+-- 4.	WAQTD job and maximum salary where employees joined after 1981, and maximum salary exceeds 2500,ordered by maximum salary descending.
+select job,max(sal) from emp where hiredate>'1981-01-01' group by job having max(sal)>2500 order by max(sal) desc;
+
+-- 6.	WAQTD department number and number of employees excluding PRESIDENT, where department has more than 2 employees, and order by employee count descending.
+select deptno,count(*) from emp where job<> 'president' group by deptno having count(*)>2 order by count(*) desc;
+
+-- 7.	WAQTD job and total commission where commission is not NULL, and total commission exceeds 500, ordered by total commission descending.
+select job,sum(comm) from emp where comm is not null group by job having sum(comm) >500 order by sum(comm) desc;
+
+-- 8.	WAQTD department number and minimum salary for employees earning more than 900, where minimum salary is greater than 1000, and order by minimum salary ascending.
+select deptno,min(sal) from emp where sal>900 group by deptno having min(sal)>1000 order by min(sal) ;
+
+-- 9.	WAQTD job and average salary excluding SALESMAN, where average salary is greater than 2500, and order by average salary descending.
+select job,avg(sal) from emp where job<>'salesman' group by job having avg(sal)>2500 order by avg(sal) desc;
+
+-- 10.	WAQTD department number and maximum salary for employees hired before 1982, where department has more than 1 employee, and order by maximum salary descending.
+select deptno,max(sal) from emp where hiredate<'1982-01-01' group by deptno having count(*)>1 order by max(sal) desc;
+
+-- 11.	WAQTD job and count of employees where salary is greater than 1000, and job has more than 1 employee, and order by job name alphabetically.
+select job,count(*) from emp where sal>1000 group by job having count(*)>1 order by job;
+
+-- all:
+-- 1.	WAQTD employees whose salary is less than ALL MANAGER salaries.
+select * from  emp where sal<all(select sal from emp where job='manager');
+
+-- 2.	WAQTD employees whose salary is greater than ALL employees working in department 30.
+select * from emp where sal>all(select sal from emp where deptno=30);
+
+-- 3.	WAQTD employees whose hiredate is earlier than all employees in department 20.
+select * from emp where hiredate<all(select hiredate from emp where deptno=20);
+
+-- 4.	WAQTD employees whose hiredate is earlier than ALL employees working in department 10.
+select * from emp where hiredate<all(select hiredate from emp where deptno=10);
+
+-- 5.	WAQTD employees whose commission is greater than ALL commissions received by other employees.
+select * from emp where comm >all(select comm from emp  where comm is not null);
+
+-- 6.	WAQTD employees whose salary is equal to ALL salaries of CLERK employees.
+select * from emp where sal=all(select sal from emp where job='clerk');
+
+-- 7.	WAQTD employees whose salary is greater than ALL salaries from employees working in CHICAGO.
+select * from emp where sal>all(select sal from emp where deptno in(select deptno from dept where loc='chicago'));
+
+-- 8.	WAQTD employees whose hiredate is later than ALL employees who are MANAGERs.
+select * from emp where hiredate>all(select hiredate from emp where job='manager');
+
+-- 9.	WAQTD employees whose salary is less than ALL employees working in department 20.
+select * from emp where sal<all(select sal from emp where deptno=20);
+
+-- 10.	WAQTD employees whose salary is greater than ANY salary of CLERKs but less than ALL salaries of MANAGERs.
+select * from emp where sal>any(select sal from emp where job='clerk' ) and sal<all(select sal from emp where job='manager');
+
+-- 11.	WAQTD employees whose salary is greater than ALL employees in one department but only greater than ANY in another department.
+select * from emp where sal>all(select sal from emp where deptno=30)and sal>any(select sal from emp where deptno =10);
+
+-- any:
+-- 1.	WAQTD employees whose salary is greater than ANY salary of employees working in department 10.
+select * from emp where sal>any(select sal from emp where deptno=10);
+
+-- 2.	WAQTD employees whose salary is less than ANY salary of MANAGERs.
+select * from emp where sal<any(select sal from emp where job='manager');
+
+-- 3.	WAQTD employees whose hiredate is earlier than ANY employee working in department 20.
+select * from emp where hiredate<any(select hiredate from emp where deptno=20);
+
+-- 4.	WAQTD employees whose commission is greater than ANY commission received by other employees.
+select * from emp where comm >any(select comm from emp where comm is not null);
+
+-- 5.	WAQTD employees whose salary is equal to ANY salary of employees working as CLERK.
+select  * from emp where sal=any(select sal from emp where job='clerk');
+
+-- 6.	WAQTD employees whose salary is greater than ANY salary of SALESMANs.
+select * from emp where sal>any(select sal from emp where job='salesman');
+
+-- 7.	WAQTD employees whose hiredate is later than ANY employee in department 30.
+select * from emp where hiredate>any(select hiredate from emp where deptno=30);
+
+-- 8.	WAQTD employees whose salary is less than ANY salary of employees working in NEW YORK department.
+select * from emp where sal <any(select sal from emp where deptno in(select deptno from dept where loc='new york'));
+
+-- 9.	WAQTD employees whose hiredate is earlier than ANY SALESMAN and later than ALL CLERKs.
+select * from emp where hiredate<any(select hiredate from emp where job='salesman') and hiredate>all(select hiredate from emp where job='clerk');
+
+-- 10.	WAQTD employees whose salary is not equal to ANY salary of employees working in department 30.
+select * from emp where not sal=any(select sal from emp where deptno=30);
+
+
+-- nested subqueries:
+-- 1.	waqtd third minimum salary.
+select min(sal) from emp
+group  by sal 
+order by sal 
+limit 1 offset 2;
+
+select min(sal) from  emp where sal>(select min(sal) from emp where sal>(select min(sal) from emp ));
+
+-- 2.	waqtd details of emp who is earning second maximum salary.
+select * from emp where sal in (select max(sal) from emp where sal<(select max(sal) from emp ));
+select * from emp order by sal desc limit 1 offset 1;
+select  * from (select sal,dense_rank() over (order by sal desc) r from emp) subquery where r=2;
+
+
+-- 3.	waqtd details of employee who is hired third in the company.
+select * from emp where hiredate=(select min(hiredate) from emp where hiredate>(select min(hiredate) from emp where hiredate>(select min(hiredate) from emp)));
+select * from emp order by hiredate limit 1 offset 2;
+
+-- 4.	waqtd seventh maximum salary.
+select * from emp order  by sal  desc limit 1 offset 6;
+
+-- 5.	waqtd department,name of employee who are earning fifth maximum salary.
+select deptno,ename from emp where sal=(select distinct sal from emp  order by sal desc limit 1 offset 4);
+select * from emp order by sal desc;
+
+-- 6.	waqtd manager of smith
+select * from emp where empno=(select mgr from emp where ename ='smith');
+
+-- 7.	waqtd name of managers manager of allen
+select * from emp where empno=(select mgr from emp where empno in (select mgr from emp  where ename='allen'));
+
+-- 8.	waqtd department details of the manager of clark.
+select * from dept where deptno=(select deptno from emp where empno=(select mgr from emp where ename='clark'));
+
+-- 9.	waqtd name of employee hired before the last employee
+select ename from emp where hiredate=(select max(hiredate) from emp where hiredate<(select max(hiredate) from emp));
+
+-- 10.	waqtd details of employees who are reporting to employee hired on 1981-11-17.
+select * from emp where mgr in (select empno from emp where hiredate='1981-11-17');
+select * from emp;
+
+-- 11.	waqtd number of employees reporting to ford's manager.
+select count(*) from emp where mgr in (select empno from emp where empno in (select mgr from emp where ename='ford'));
+
