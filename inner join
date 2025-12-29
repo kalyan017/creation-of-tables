@@ -1,0 +1,67 @@
+-- assignment-7:
+-- 1.	Waqtd no. of employees working in each department except president.
+select count(*) from emp where not job='president'group by deptno;
+ use empdb;
+-- 2.	Waqtd total salary needed to pay all the employees in each job.
+select job,sum(sal) from emp group by job;
+
+-- 3.	Waqtd no. of employees working as manager in each department.
+select deptno,count(*) from emp where job='manager' group by deptno;
+
+-- 4.	Waqtd no. of average salary needed to pay all the employees in each department excluding the employees in department 20.
+select deptno,avg(sal) from emp where not deptno=20 group by deptno;
+
+-- 5.	Waqtd no. of employees having character ‘a’ in their names in each job.
+select job,count(*) from emp where ename like '%a%' group by job;
+
+-- 6.	Waqtd no. of employees and average salary needed to pay the employees who are earning salary greater than 2000 in each department.
+select deptno,count(*),avg(sal) from emp where sal>2000 group by deptno;
+
+-- 7.	Waqtd sum of salaries needed to pay to employees and no. of salesman in each department.
+select deptno,sum(sal) ,count(*) from emp where job='salesman' group by deptno;
+select * from emp; 
+
+-- 8.	Waqtd no. of employees with their maximum salary in each job.
+select count(*) from emp where sal in (select max(sal) from emp group by job);
+select job,max(sal) from emp group by job;
+
+-- 9.	Waqtd maximum salary given to employees working in each job.
+select job,max(sal) from emp group by job;
+
+-- 10.	Waqtd no. of times the salary presents in employee table.
+select count(*) from emp where sal is not null;
+
+-- 11.	Waqtdthe number of employees and total salary for each job in each department.
+select deptno,job,count(*) no_of_emp,sum(sal) from emp group by job,deptno
+order by deptno;
+
+-- 12.	Waqtd department number, no. of employees working in each department if there are at least 2 clerks in each department.
+select deptno,count(*) from emp where deptno in (select deptno from emp where job='clerk'  group by deptno having count(*)>=2)group by deptno;
+
+-- 13.	Waqtd department number, sum of salary needed to pay to all the employees in each department if there are at least 4 employees in each department.
+select deptno,sum(sal) from emp where deptno in (select deptno from emp group by deptno having count(*)>=4) group by deptno;
+
+-- 14.	Waqtd no. of employees earning salary more than 1200 in each job and the sum of salary.
+select job, count(*),sum(sal) from emp where sal in (select sal from emp where sal >1200) group by job order by sum(sal); 
+
+-- 15.	Waqtd job, maximum salary of employee in each job if the maximum salary is greater than 2000.
+select job,max(sal) from emp group by job having max(sal)>2000;
+
+-- 16.	Waqtd department number, no. of employees working only if there are 2 employees working in each department as manager.
+select deptno,count(*)  from emp where deptno in (select deptno from emp  where  job='manager' group by deptno having count(*)=2) group by deptno;
+
+-- 17.	Waqtd salary which are repeated in employee table.
+select sal from emp group by sal having count(*)>1;
+
+-- 18.	Waqtd the hiredate which are duplicated in employee table.
+select hiredate from emp group by hiredate having count(*)>1;
+
+-- 19.	Waqtd average salary of each department if average salary is less than 3000.
+select  deptno,avg(sal) from emp group by deptno having avg(sal)<3000;
+
+-- 20.	Waqtd department number if there are at least 3 employees in each department whose name has character ‘a’ or ‘s’.
+select deptno from emp where ename like '%a%' or ename like '%s%' group by deptno having count(*)>=3;
+
+
+-- 21.	Waqtd minimum and maximum salary of each job if minimum greater than 1000 and maximum less than 5000.
+select job, min(sal),max(sal) from emp group by job having min(sal)>1000 and max(sal)<5000;
