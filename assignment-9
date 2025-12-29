@@ -1,0 +1,66 @@
+Assignment-9
+
+
+-- 1.	Waqtd 5th minimum salary.
+select * from(select distinct sal from emp) e order by sal desc limit 4,1;
+
+-- 2.	Waqtd name of employee who are earning third maximum salary.
+select ename  from emp where sal in (select distinct sal from emp)  order by sal desc limit 2,1;
+
+-- 3.	Waqtdempno of employee who is earning second minimum salary.;
+select deptno from emp order by sal limit 1,1;
+
+-- 4.	Waqtd department name of employee who is earning fourth maximum salary.
+select d.dname,e.sal from emp e join dept d on e.deptno=d.deptno order by sal desc limit 3,1;
+
+-- 5.	Waqtd details of employee who was hired sixth in the company.
+select * from emp order by hiredate limit 5,1;
+
+-- 6.	Waqtd name of employee hired before the last employee.
+select ename from emp order by hiredate desc limit 1,1;
+
+-- 7.	Waqtd location of employee who was hired first.
+select d.loc ,e.ename from dept d join emp e on d.deptno=e.deptno order by e.hiredate limit 0,1;
+
+-- 8.	Waqtd details of employee earning seventh minimum salary.
+select *  from emp order by sal  limit  6,1;
+
+-- 9.	Waqtd department name of employee getting twelfth maximum salary.
+select d.dname ,e.ename from dept d join emp e on d.deptno=e.deptno order by e.sal desc limit 11,1;
+
+-- 10.	Waqtdno.of employee reporting to ford’s manager.
+ select count(*) from emp where mgr in (select mgr from emp where ename='ford');
+select * from dept;
+
+-- 11.	Waqtd location of smith’s managers manager.
+select loc from dept where deptno in (select deptno from emp where empno in (select mgr from emp where empno in (select mgr from  emp where ename='smith')));
+
+-- 12.	Waqtd names along with department names of the employee.
+select e.ename,d.dname from emp e join dept d on e.deptno=d.deptno;
+
+-- 13.	Waqtdename, sal along with the department details of employees who are earning greater 1500.
+select e.ename,e.sal,d.* from emp e join dept d on e.deptno=d.deptno where e.sal>1500;
+
+-- 14.	Waqtd employee details along with department details if employees are working in department number 30 and salary less than 3000.
+select e.*,d.* from emp e join dept d on e.deptno=d.deptno where e.deptno=30 and e.sal<3000;
+
+-- 15.	Waqtd names of employees along with their department number and location if they are working in sales or research department and earning salary less than 800.
+select e.ename,e.deptno,d.loc  from emp e join dept d on e.deptno=d.deptno where d.dname in ('sales','research') and e.sal < 800;
+
+-- 16.	Waqtd department name along with no. of employees working in each department.
+select d.dname,count(e.empno) from dept d left join emp e on d.deptno=e.deptno group by d.dname;
+
+-- 17.	Waqtddeparment name along with minimum salary, maximum salary of that department where at least 5 employees are working.
+select d.dname,min(e.sal),max(e.sal) from dept d join emp e on d.deptno=e.deptno group by d.dname having count(*)>=5;
+
+-- 18.	Waqtd employee details, department details if employees are hired after clark.
+select e.*,d.* from emp e join dept d on e.deptno=d.deptno where hiredate>(select hiredate from emp where ename='clark');
+
+-- 19.	Waqtd employee details along with their department names if they are earning 4 digits salary and hired before ‘adams’.
+select e.*,d.dname from emp e join dept d on e.deptno=d.deptno where e.sal between 1001 and 9999 and e.hiredate<(select hiredate from emp where ename='adams');
+
+
+
+
+
+
